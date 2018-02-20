@@ -1,20 +1,47 @@
 express = require('express')
 bodyParser = require('body-parser')
 var app = express()
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://husainhz7:undertalek@ds143388.mlab.com:43388/bulletin');
+
 app.use(bodyParser.urlencoded({
   extended: true
 }));
 text = "Hello World!"
 
+var noticeSchema = new mongoose.Schema({
+	name: String
+});
+var Notice = mongoose.model("Notice",noticeSchema);
+
 app.post('/', function(req,res){
 	text = req.body.name;
 	res.redirect('/')
+	Notice.create({
+		name: text
+	},function(err, notice){
+		if(err){
+			console.log(err);
+		}else{
+			console.log(notice);
+		}
+	})
 })
 
 app.get('/',function(req,res){
-	res.send(text)
+	
+	Notice.find({},function(err,notices){
+	if(err){
+		console.log("ERRR000");
+		console.log(err);
+	} else {
+		console.log(notices)
+	}
+	// res.send(text)
+	})
 })
 
+// mongodb://husainhz7:undertalek@ds143388.mlab.com:43388/bulletin
 
 
 app.listen(process.env.PORT || 3000, function(){
