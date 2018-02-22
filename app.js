@@ -2,7 +2,7 @@ express = require('express')
 bodyParser = require('body-parser')
 var app = express()
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://husainhz7:undertalek@ds143388.mlab.com:43388/bulletin');
+mongoose.connect('mongodb://husainhz7:undertale@ds143388.mlab.com:43388/bulletin');
 
 app.use(bodyParser.urlencoded({
   extended: true
@@ -30,15 +30,16 @@ app.post('/', function(req,res){
 
 app.get('/',function(req,res){
 	
-	Notice.find({},function(err,notices){
-	if(err){
-		console.log("ERRR000");
-		console.log(err);
-	} else {
-		console.log(notices)
-	}
-	// res.send(text)
-	})
+	// Notice.find({},function(err,notices){
+	// if(err){
+	// 	console.log("ERRR000");
+	// 	console.log(err);
+	// } else {
+	// 	console.log(notices)
+	// }
+	// // res.send(text)
+	// })
+	res.send(text)
 })
 
 // mongodb://husainhz7:undertalek@ds143388.mlab.com:43388/bulletin
