@@ -15,15 +15,15 @@ var noticeSchema = new mongoose.Schema({
 var Notice = mongoose.model("Notice",noticeSchema);
 
 app.post('/', function(req,res){
-	text = req.body.name;
-	res.redirect('/')
 	Notice.create({
 		name: text
 	},function(err, notice){
 		if(err){
 			console.log(err);
 		}else{
+			text = req.body.name;
 			console.log(notice);
+			res.redirect('/')
 		}
 	})
 })
